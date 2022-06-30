@@ -1,6 +1,6 @@
-package config;
+package app.config;
 
-import model.User;
+import app.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,13 +15,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+// 4. Конфигурация Spring через JavaConfig и аннотации, по аналогии с предыдущими проектами.
+// Без использования xml. Без Spring Boot.
+
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement // если все пошло не по плану делает ролбэк
-@ComponentScan(value = "java")
-
-// 4. Конфигурация Spring через JavaConfig и аннотации, по аналогии с предыдущими проектами.
-// Без использования xml. Без Spring Boot.
+@ComponentScan(value = "app")
 public class JavaConfig {
 
     @Autowired

@@ -1,7 +1,4 @@
-package model;
-
-import org.springframework.lang.NonNull;
-import org.springframework.validation.annotation.Validated;
+package app.Model;
 
 import javax.persistence.*;
 

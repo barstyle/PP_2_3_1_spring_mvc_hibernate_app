@@ -1,6 +1,6 @@
-package DAO;
+package app.DAO;
 
-import model.User;
+import app.Model.User;
 
 import java.util.List;
 
