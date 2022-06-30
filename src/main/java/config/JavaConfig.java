@@ -1,5 +1,6 @@
 package config;
 
+import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -48,10 +49,11 @@ public class JavaConfig {
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
 
         localSessionFactoryBean.setHibernateProperties(properties);
-        // localSessionFactoryBean.setAnnotatedClasses(User.class);
+        localSessionFactoryBean.setAnnotatedClasses(User.class);
         return localSessionFactoryBean;
     }
 
+    @Bean
     public HibernateTransactionManager getTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(getSessionFactory().getObject());
