@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -20,8 +21,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
         TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User ");
+//        if (query.getResultList() == null) {
+//            return new ArrayList<User>();
+//        }
         return query.getResultList();
     }
 

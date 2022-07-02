@@ -5,9 +5,11 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     // Метод, указывающий на класс конфигурации
+
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[0];
     }
 
     // Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения jsp.
