@@ -1,6 +1,11 @@
 package app.Model;
 
+import org.springframework.stereotype.Service;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 // 2. Должен быть класс User с произвольными полями (id, name и т.п.).
 @Entity
@@ -11,12 +16,18 @@ public class User {
     private Long id;
 
     @Column(name = "first_name")
+    @NotEmpty(message = "Firstname should not be empty")
+    @Size(min = 2, max = 50, message = "Firstname should be between 2 and 30 characters")
     private String firstName;
 
     @Column(name = "last_name")
+    @NotEmpty(message = "Lastname should not be empty")
+    @Size(min = 2, max = 50, message = "Lastname should be between 2 and 30 characters")
     private String lastName;
 
     @Column(name = "email", unique = true)
+    @NotEmpty(message = "Email should not be empty")
+    @Email(message = "Email should be valid")
     private String email;
 
     public User() {
