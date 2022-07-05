@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping(value = "/")
     public String getUsers(Model model,
-                           @ModelAttribute("new_user") User new_user) {
+                           @ModelAttribute("new_user") User new_user){
         List<User> userList = userService.getAllUsers();
         model.addAttribute("users", userList);
         return "/users";
@@ -38,5 +38,4 @@ public class UserController {
         userService.remove(userService.getUserById(id));
         return "redirect:/";
     }
-
 }
