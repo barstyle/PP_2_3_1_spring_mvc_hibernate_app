@@ -38,4 +38,12 @@ public class UserController {
         userService.remove(userService.getUserById(id));
         return "redirect:/";
     }
+
+    @GetMapping("user-update/{id}")
+    public String editUser(@PathVariable("id") Long id, Model model, Model model2) {
+        User user = userService.getUserById(id);
+        model.addAttribute("new_user", user);
+        model2.addAttribute("users", userService.getAllUsers());
+        return "/users";
+    }
 }
