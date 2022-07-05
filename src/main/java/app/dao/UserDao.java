@@ -1,6 +1,6 @@
-package app.DAO;
+package app.dao;
 
-import app.Model.User;
+import app.models.User;
 
 import java.util.List;
 
@@ -13,5 +13,7 @@ public interface UserDao {
     void update(User user);
 
     void remove(User user);
+
+    User getUserById(Long id);
 
 }

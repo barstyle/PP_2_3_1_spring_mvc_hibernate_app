@@ -1,12 +1,11 @@
-package app.DAO;
+package app.dao;
 
-import app.Model.User;
+import app.models.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -24,9 +23,6 @@ public class UserDaoImpl implements UserDao {
     @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
         TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User ");
-//        if (query.getResultList() == null) {
-//            return new ArrayList<User>();
-//        }
         return query.getResultList();
     }
 
@@ -39,4 +35,10 @@ public class UserDaoImpl implements UserDao {
     public void remove(User user) {
         sessionFactory.getCurrentSession().remove(user);
     }
+
+    @Override
+    public User getUserById(Long id) {
+        return sessionFactory.getCurrentSession().get(User.class, id);
+    }
 }
+

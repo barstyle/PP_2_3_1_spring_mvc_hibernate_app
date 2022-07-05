@@ -1,13 +1,11 @@
-package app.controller;
+package app.controllers;
 
-import app.Model.User;
-import app.Services.UserService;
-import app.Services.UserServiceImpl;
+import app.models.User;
+import app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,11 +33,10 @@ public class UserController {
         return "redirect:/";
     }
 
-//    @PostMapping()
-//    public String removeUser(@ModelAttribute("del_user") User user_del) {
-//        userService.remove(user_del);
-//        return "redirect:/";
-//    }
-
+    @GetMapping("/user-delete/{id}")
+    public String removeUser(@PathVariable("id") Long id) {
+        userService.remove(userService.getUserById(id));
+        return "redirect:/";
+    }
 
 }

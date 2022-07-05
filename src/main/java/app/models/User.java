@@ -1,6 +1,4 @@
-package app.Model;
-
-import org.springframework.stereotype.Service;
+package app.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

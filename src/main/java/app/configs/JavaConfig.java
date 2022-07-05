@@ -1,6 +1,6 @@
-package app.config;
+package app.configs;
 
-import app.Model.User;
+import app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -43,7 +43,7 @@ public class JavaConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(getDataSource());
-        localSessionFactoryBean.setPackagesToScan("app.Model");
+        localSessionFactoryBean.setPackagesToScan("app.models");
 
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));

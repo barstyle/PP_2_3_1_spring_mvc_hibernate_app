@@ -1,7 +1,7 @@
-package app.Services;
+package app.services;
 
-import app.DAO.UserDao;
-import app.Model.User;
+import app.dao.UserDao;
+import app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,5 +36,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void remove(User user) {
         userDao.remove(user);
+    }
+
+    @Transactional
+    @Override
+    public User getUserById(Long id) {
+        return userDao.getUserById(id);
     }
 }

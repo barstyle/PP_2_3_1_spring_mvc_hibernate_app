@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All Users</title>
+    <meta http-equiv="content-language" content="en">
+    <title lang="en">All Users</title>
 </head>
 <body>
 <h3>All users page</h3>
@@ -14,12 +14,14 @@
             <table>
                 <thead>
                 <tr>
+                    <th><label for="id">id</label> </th>
                     <th><label for="firstName">firstname</label></th>
                     <th><label for="lastName">lastname</label></th>
                     <th><label for="email">e-mail</label></th>
                 </tr>
                 </thead>
                 <tr>
+                    <th><input readonly type="number" th:field="*{id}" id="id" placeholder="id"></th>
                     <th><input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name"/></th>
                     <th><input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name"/></th>
                     <th><input type="text" th:field="*{email}" id="email" placeholder="Email"/></th>
@@ -46,14 +48,22 @@
             <th th:text="e-mail">email</th>
         </tr>
         </thead>
+        <tbody>
         <tr th:each="user: ${users}">
             <td th:text="${user.getId()}">id</td>
             <td th:text="${user.getFirstName()}">firstname</td>
             <td th:text="${user.getLastName()}">lastname</td>
             <td th:text="${user.getEmail()}">email</td>
+            <td><a th:href="@{user-update/{id}(id=${user.getId()})}">edit</a></td>
+            <td><a th:href="@{user-delete/{id}(id=${user.getId()})}">delete</a></td>
         </tr>
+        </tbody>
     </table>
 </div>
 <br>
+<hr/>
+<div class="container">
+
+</div>
 </body>
 </html>
