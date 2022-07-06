@@ -27,6 +27,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return new String[]{"/"};
     }
 
+    // Вот после этого заработал русский язык в динамических таблицах
     @Override
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();

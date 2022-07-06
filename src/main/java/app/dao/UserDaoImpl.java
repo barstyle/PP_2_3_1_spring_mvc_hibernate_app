@@ -33,6 +33,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    //просто римув-юзер не робит
     public void removeUserById(Long id) {
         entityManager.remove(getUserById(id));
     }
