@@ -10,6 +10,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -39,26 +43,51 @@ public class JavaConfig {
 
     // 5. Внесите изменения в конфигурацию для работы с базой данных.
     // Вместо SessionFactory должен использоваться EntityManager.
-    @Bean
-    public LocalSessionFactoryBean getSessionFactory() {
-        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-        localSessionFactoryBean.setDataSource(getDataSource());
-        localSessionFactoryBean.setPackagesToScan("app.models");
+//    @Bean // BEFORE
+//    public LocalSessionFactoryBean getSessionFactory() {
+//        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
+//        localSessionFactoryBean.setDataSource(getDataSource());
+//        localSessionFactoryBean.setPackagesToScan("app.models");
+//
+//        localSessionFactoryBean.setHibernateProperties(getHibernateProperties());
+//        localSessionFactoryBean.setAnnotatedClasses(User.class);
+//        return localSessionFactoryBean;
+//    }
 
+    @Bean
+    public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
+        LocalContainerEntityManagerFactoryBean entityManageFB = new LocalContainerEntityManagerFactoryBean();
+        entityManageFB.setJpaVendorAdapter(getJpaVendorAdapter());
+        entityManageFB.setDataSource(getDataSource());
+        entityManageFB.setPackagesToScan("app.models");
+        entityManageFB.setJpaProperties(getHibernateProperties());
+        return entityManageFB;
+
+    }
+
+    @Bean
+    public JpaVendorAdapter getJpaVendorAdapter() {
+        return new HibernateJpaVendorAdapter();
+    }
+
+    @Bean
+    public JpaTransactionManager getTransactionManager() {
+        return new JpaTransactionManager(getEntityManagerFactoryBean().getObject());
+    }
+
+//    @Bean // BEFORE
+//    public HibernateTransactionManager getTransactionManager() {
+//        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+//        transactionManager.setSessionFactory(getSessionFactory().getObject());
+//        return transactionManager;
+//    }
+
+    private Properties getHibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
-
-        localSessionFactoryBean.setHibernateProperties(properties);
-        localSessionFactoryBean.setAnnotatedClasses(User.class);
-        return localSessionFactoryBean;
+        return properties;
     }
 
-    @Bean
-    public HibernateTransactionManager getTransactionManager() {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(getSessionFactory().getObject());
-        return transactionManager;
-    }
 
 }
